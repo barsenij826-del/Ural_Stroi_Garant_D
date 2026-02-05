@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ООО «Уралстройгарант» — Строительная компания с 20-летним опытом</title>
+    <meta name="description" content="Строительство объектов любой сложности: промышленные, коммерческие, социальные. Лицензия Минкультуры, СРО, опыт работы с госзаказами. Екатеринбург.">
+
+    <!-- Шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== ГЛОБАЛЬНЫЕ СТИЛИ ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a3a5f;      /* Темно-синий (надёжность) */
+            --secondary: #2c5e8d;    /* Средний синий */
+            --accent: #e67e22;       /* Оранжевый — акцент на действие */
+            --light: #f8f9fa;
+            --dark: #121212;
+            --text-dark: #333;
+            --text-light: #555;
+            --border: #e0e0e0;
+            --shadow: 0 6px 25px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 90px 0;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Roboto Condensed', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 { font-size: 3.2rem; }
+        h2 { font-size: 2.4rem; margin-bottom: 20px; }
+        h3 { font-size: 1.7rem; margin-bottom: 15px; }
+        p { font-size: 1.1rem; margin-bottom: 16px; }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #d35400;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(230, 126, 34, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* ===== ШАПКА ===== */
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-top {
+            background: var(--primary);
+            color: white;
+            padding: 10px 0;
+            font-size: 0.9rem;
+        }
+
+        .header-top-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Roboto Condensed', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: var(--text-dark);
+            font-weight: 600;
+            position: relative;
+            padding: 10px 0;
+        }
+
+        nav a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        nav a:hover:after {
+            width: 100%;
+        }
+
+        /* ===== ГЕРОЙ ===== */
+        .hero {
+            background: linear-gradient(rgba(26, 58, 95, 0.9), rgba(18, 26, 37, 0.95)), url('https://images.unsplash.com/photo-1560448205-e02f56c1a268?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 140px 0;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.6rem;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.4);
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            opacity: 0.95;
+            margin-bottom: 40px;
+        }
+
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        /* ===== ПОРТФОЛИО ===== */
+        .portfolio {
+            background: white;
+        }
+
+        .portfolio-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+        }
+
+        .project-img {
+            height: 180px;
+            background: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .project-info {
+            padding: 25px;
+        }
+
+        .project-info h3 {
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+
+        .project-type {
+            display: inline-block;
+            background: rgba(26, 58, 95, 0.1);
+            color: var(--primary);
+            font-size: 0.85rem;
+            padding: 4px 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        /* ===== УСЛУГИ ===== */
+        .services {
+            background: var(--light);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .service-item {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .service-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            font-size: 2.4rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        /* ===== ПРЕИМУЩЕСТВА ===== */
+        .advantages {
+            background: white;
+        }
+
+        .advantage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+
+        .advantage-card {
+            text-align: center;
+            padding: 30px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .advantage-icon {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        /* ===== О КОМПАНИИ ===== */
+        .about {
+            background: var(--primary);
+            color: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            color: white;
+            margin-bottom: 25px;
+        }
+
+        .about-text p {
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .facts {
+            margin-top: 30px;
+        }
+
+        .fact-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .fact-number {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--accent);
+            min-width: 80px;
+        }
+
+        /* ===== КОНТАКТЫ ===== */
+        .contact-section {
+            background: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .contact-info h3 {
+            color: var(--primary);
+            margin-bottom: 25px;
+        }
+
+        .contact-details {
+            margin: 25px 0;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+
+        .contact-item i {
+            color: var(--accent);
+            font-size: 1.4rem;
+            min-width: 24px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            margin-bottom: 16px;
+            font-family: inherit;
+        }
+
+        .contact-form textarea {
+            height: 140px;
+            resize: vertical;
+        }
+
+        /* ===== ФУТЕР ===== */
+        footer {
+            background: var(--dark);
+            color: #aaa;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            position: relative;
+        }
+
+        .footer-col h4:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .requisites {
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+        }
+
+        /* ===== АДАПТИВНОСТЬ ===== */
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 3.0rem; }
+            .about-content { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 100px 0;
+            }
+            .hero h1 { font-size: 2.6rem; }
+            .hero p { font-size: 1.2rem; }
+            .hero-btns { flex-direction: column; align-items: center; }
+            nav ul { gap: 20px; }
+            .portfolio-grid, .services-grid, .advantage-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 2.0rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ШАПКА -->
+    <header>
+        <div class="header-top">
+            <div class="container header-top-content">
+                <div class="logo">Уралстройгарант</div>
+                <div>
+                    📞 +7 (343) 266-37-25 | ✉️ uralsg1@yandex.ru
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <nav>
+                <ul>
+                    <li><a href="#about">О компании</a></li>
+                    <li><a href="#portfolio">Портфолио</a></li>
+                    <li><a href="#services">Услуги</a></li>
+                    <li><a href="#advantages">Преимущества</a></li>
+                    <li><a href="#contacts">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ГЕРОЙ -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Строительная компания с 20-летним опытом</h1>
+            <p>Реализуем объекты любой сложности: промышленные цеха, торговые центры, гособъекты, административные здания и социальные комплексы</p>
+            <div class="hero-btns">
+                <a href="#portfolio" class="btn">Наши проекты</a>
+                <a href="#contacts" class="btn btn-outline">Связаться</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПОРТФОЛИО -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <div class="portfolio-title">
+                <h2>Наши ключевые проекты</h2>
+                <p>Более 50 крупных объектов по всей России</p>
+            </div>
+            <div class="portfolio-grid">
+                <div class="project-card">
+                    <div class="project-img">Покровский Пассаж</div>
+                    <div class="project-info">
+                        <div class="project-type">Коммерческая недвижимость</div>
+                        <h3>Торговый центр класса «люкс»</h3>
+                        <p>22 000 м², 9 бутиков, 3 ресторана, концертная площадка</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">Бизнес-центр «Маршал»</div>
+                    <div class="project-info">
+                        <div class="project-type">Административное здание</div>
+                        <h3>12-этажный офис с подземным паркингом</h3>
+                        <p>Екатеринбург, пересечение Шейнкмана и Боевых Дружин</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">Технопарк «Южная»</div>
+                    <div class="project-info">
+                        <div class="project-type">Промышленный объект</div>
+                        <h3>Центр специализированного ремонта техники</h3>
+                        <p>450+ единиц тракторной и автомобильной техники, ст. Тамань</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">ЛОЗ Свердловской области</div>
+                    <div class="project-info">
+                        <div class="project-type">Социальный объект</div>
+                        <h3>Лечебно-оздоровительный комплекс</h3>
+                        <p>Полный цикл: проектирование, строительство, благоустройство</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">УВД Свердловской ж/д</div>
+                    <div class="project-info">
+                        <div class="project-type">Гособъект</div>
+                        <h3>Реконструкция и модернизация</h3>
+                        <p>СКС, вентиляция, кондиционирование, усиление конструкций</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">Усадьба Ощепкова</div>
+                    <div class="project-info">
+                        <div class="project-type">Реставрация памятника</div>
+                        <h3>Реставрация XIX века</h3>
+                        <p>Фасады, кровля, лепнина, интерьеры — с лицензией Минкультуры</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- УСЛУГИ -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2>Наши услуги</h2>
+            <p>Полный цикл работ «под ключ» — от проекта до сдачи</p>
+            <div class="services-grid">
+                <div class="service-item">
+                    <div class="service-icon">🏗️</div>
+                    <h3>Проектирование</h3>
+                    <p>Архитектурные, конструктивные, инженерные решения для любых объектов</p>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon">🔧</div>
+                    <h3>Строительство «под ключ»</h3>
+                    <p>Промышленные, административные, коммерческие и социальные объекты</p>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon">⚙️</div>
+                    <h3>Инженерные системы</h3>
+                    <p>СКС, вентиляция, кондиционирование, отопление, электроснабжение, водоснабжение</p>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon">🪨</div>
+                    <h3>Мозаика и отделка</h3>
+                    <p>Изготовление мозаичных полов и стен на оборудовании WaterJet (Италия)</p>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon">🌳</div>
+                    <h3>Благоустройство</h3>
+                    <p>Территории, парковки, ландшафтные решения</p>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon">📋</div>
+                    <h3>Служба заказчика</h3>
+                    <p>Контроль качества, сроков, бюджета — от имени заказчика</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПРЕИМУЩЕСТВА -->
+    <section class="advantages" id="advantages">
+        <div class="container">
+            <h2>Почему выбирают нас</h2>
+            <p>Надёжность, опыт и полный цикл работ</p>
+            <div class="advantage-grid">
+                <div class="advantage-card">
+                    <div class="advantage-icon">✅</div>
+                    <h3>Лицензия Минкультуры</h3>
+                    <p>№ Л040-00103-00/00625679 — подтверждает высокий уровень экспертизы</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">🛡️</div>
+                    <h3>Допуск СРО</h3>
+                    <p>№ СРО-С-109-11122009 — работа с объектами капитального строительства</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">📅</div>
+                    <h3>20+ лет на рынке</h3>
+                    <p>Основана в 2006 году. Опыт — наш главный актив</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">📊</div>
+                    <h3>50+ крупных объектов</h3>
+                    <p>От АЗС до ТЦ «Покровский Пассаж», от ЛОЗ до госучреждений</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- О КОМПАНИИ -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>ООО «Уралстройгарант»</h2>
+                    <p>Основана в 2006 году в Екатеринбурге. Компания объединила специалистов в области проектирования, строительства, инженерии и отделки.</p>
+                    <p>Мы выполняем проекты «под ключ» — от разработки документации до сдачи объекта с гарантией.</p>
+                    
+                    <div class="facts">
+                        <div class="fact-item">
+                            <div class="fact-number">20+</div>
+                            <div>лет опыта в строительстве</div>
+                        </div>
+                        <div class="fact-item">
+                            <div class="fact-number">50+</div>
+                            <div>крупных объектов реализовано</div>
+                        </div>
+                        <div class="fact-item">
+                            <div class="fact-number">1000+</div>
+                            <div>специалистов задействовано в проектах</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div style="height: 350px; background: #0d2a4a; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center;">
+                        <div style="font-size: 1.8rem; margin-bottom: 20px;">Строим то, что работает</div>
+                        <div style="max-width: 300px;">
+                            От фундамента до интерьера — каждый этап контролируем лично.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- КОНТАКТЫ -->
+    <section class="contact-section" id="contacts">
+        <div class="container">
+            <h2>Связаться с нами</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>ООО «Уралстройгарант»</h3>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i>📍</i>
+                            <span>620014, г. Екатеринбург,<br>ул. Мамина-Сибиряка, 14б, офис 2</span>
+                        </div>
+                        <div class="contact-item">
+                            <i>📞</i>
+                            <span>+7 (343) 266-37-25</span>
+                        </div>
+                        <div class="contact-item">
+                            <i>📱</i>
+                            <span>+7 912 244-04-11<br>(Латыпов Ринат, контактное лицо)</span>
+                        </div>
+                        <div class="contact-item">
+                            <i>✉️</i>
+                            <span>uralsg1@yandex.ru</span>
+                        </div>
+                        <div class="contact-item">
+                            <i>👨‍💼</i>
+                            <span>Генеральный директор:<br>Галлямов И.Г.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form>
+                        <input type="text" placeholder="Ваше имя" required>
+                        <input type="tel" placeholder="Телефон" required>
+                        <input type="email" placeholder="Email">
+                        <textarea placeholder="Описание проекта (объект, площадь, сроки)"></textarea>
+                        <button type="submit" class="btn">Отправить запрос</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ФУТЕР -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="-col">
+                    <h4>О компании</h4>
+                    <p>Строительная компания с 20-летним опытом. Реализуем объекты любой сложности — от промышленных цехов до торговых центров и гособъектов.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Реквизиты</h4>
+                    <div class="requisites">
+                        ИНН 6670134875<br>
+                        КПП 667101001<br>
+                        ОГРН 10696770134820<br>
+                        Лицензия Минкультуры № Л040-00103-00/00625679<br>
+                        СРО № СРО-С-109-11122009
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Связь</h4>
+                    <p>Работаем с госзаказчиками, частными инвесторами и девелоперами.<br>Готовы к совместным проектам.</p>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2026 ООО «Уралстройгарант». Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Плавная прокрутка -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
